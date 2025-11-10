@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maldives Guesthouse</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="login-card">
+    <h2 class="home-title">GUESTHOUSE HUB</h2>
+
+    <div class="content-up">
+        <p>Maldives stays, just a click away</p>
+        <div class="">
+        <a class="btn" href="search.html">Book Now</a>
+        <a class="btn" id="openModal">Owner Login</a>
+        </div>
+    </div>
+</div>
+
+<div class="app-download">
+    <a href="https://app.apple.com" target="_blank">
+        <img src="images/ios-logo.png" alt="ios" class="app-icon">
+    </a>
+    <a href="https://play.google.com" target="_blank">
+        <img src="images/android-logo.png" alt="android" class="app-icon">
+    </a>
+</div>
+
+<!-- Login Modal -->
+<div id="loginModal" class="modal">
+  <div class="modal-content">
+    <h2 class="popup-title">Login</h2>
+    <p>Welcome back! Please login.</p>
+
+    <input type="email" placeholder="Email" class="input-box">
+    <input type="password" placeholder="Password" class="input-box">
+
+    <label class="checkbox">
+      <input type="checkbox">Remember Me   
+    </label>
+    <button class="btn modal-btn" id="loginBtn">Login</button>
+
+    <p class="signuptext">Create an account&nbsp;
+      <a href="#" class="open-signup">Signup</a>
+      <a href="#" class="forgot-password-text">Forgot Password?</a>
+    </p>
+
+    <span class="close">&times;</span>
+  </div>
+</div>
+
+<!-- Signup Modal -->
+<div id="signupModal" class="modal">
+  <div class="modal-content">
+    <h2 class="popup-title">Signup</h2>
+    <p>Create your account to continue</p>
+
+    <input type="text" id="email" placeholder="Email" class="input-box">
+    <input type="text" id="username" placeholder="Username" class="input-box">
+    <input type="password" id="password" placeholder="Password" class="input-box">
+    <input type="text" id="phone" placeholder="Mobile Number" class="input-box">
+
+    <!-- Phone verification -->
+    <button id="sendOTP" class="btn modal-btn">Send OTP</button>
+
+    <!-- OTP section -->
+    <div class="otp-section" style="display:none; margin-top:10px;">
+      <input type="text" id="otp" placeholder="OTP" class="input-box">
+      <button id="verifyOTP" class="btn modal-btn">Verify OTP</button>
+    </div>
+
+    <!-- Signup button -->
+    <button id="signupBtn" class="btn modal-btn" style="display:none; margin-top:10px;">Create Account</button>
+
+    <span class="close">&times;</span>
+  </div>
+</div>
+
+<!-- Toast container for smooth messages -->
+<div id="toast"></div>
+
+<script>
+// ===== TOAST FUNCTION =====
+function showToast(message) {
+  const toast = document.getElementById("toast");
+  toast.textContent = message;
+  toast.classList.add("show");
+  setTimeout(() => toast.classList.remove("show"), 2500);
+}
+
+// ===== LOGIN MODAL =====
+const loginModal = document.getElementById("loginModal");
+const openLoginBtn = document.getElementById("openModal");
+const loginCloseBtn = loginModal.querySelector(".close");
+const loginBtn = document.getElementById("loginBtn");
+
+openLoginBtn.addEventListener("click", () => loginModal.style.display = "flex");
+loginCloseBtn.addEventListener("click", () => loginModal.style.display = "none");
+
+window.addEventListener("click", e => {
+  if(e.target === loginModal) loginModal.style.display = "none";
+});
+window.addEventListener("keydown", e => {
+  if(e.key === "Escape") loginModal.style.display = "none";
+});
+
+// ===== LOGIN REDIRECT =====
+loginBtn.addEventListener("click", () => {
+  // You can add real login verification here if needed
+  // For now, redirect immediately to owner dashboard
+  window.location.href = "owner-dashboard.html";
+});
+
+// ===== SIGNUP MODAL =====
+const signupModal = document.getElementById("signupModal");
+const signupCloseBtn = signupModal.querySelector(".close");
+const openSignupLinks = document.querySelectorAll(".open-signup");
+
+// Open signup modal from login modal link
+openSignupLinks.forEach(link => {
+  link.addEventListener("click", e => {
+    e.preventDefault();
+    loginModal.style.display = "none";
+    signupModal.style.display = "flex";
+  });
+});
+
+// Close signup modal
+signupCloseBtn.addEventListener("click", () => signupModal.style.display = "none");
+window.addEventListener("click", e => { if(e.target === signupModal) signupModal.style.display = "none"; });
+window.addEventListener("keydown", e => { if(e.key === "Escape") signupModal.style.display = "none"; });
+
+// ===== SIGNUP OTP FLOW =====
+const sendOTPBtn = document.getElementById("sendOTP");
+const otpSection = document.querySelector(".otp-section");
+const verifyOTPBtn = document.getElementById("verifyOTP");
+const signupBtn = document.getElementById("signupBtn");
+
+// Step 1: Send OTP
+sendOTPBtn.addEventListener("click", () => {
+  const phone = document.getElementById("phone").value.trim();
+  if(!phone) {
+    showToast("Enter your phone number first");
+    return;
+  }
+  otpSection.style.display = "block";
+  sendOTPBtn.style.display = "none";
+  showToast("OTP sent ✅ Enter the code");
+});
+
+// Step 2: Verify OTP
+verifyOTPBtn.addEventListener("click", () => {
+  const otp = document.getElementById("otp").value.trim();
+  if(!otp) {
+    showToast("Enter the OTP to continue");
+    return;
+  }
+  otpSection.style.display = "none";
+  signupBtn.style.display = "block";
+  showToast("OTP verified ✅");
+});
+
+// Final Signup
+signupBtn.addEventListener("click", () => {
+  const email = document.getElementById("email").value.trim();
+  const username = document.getElementById("username").value.trim();
+  const password = document.getElementById("password").value.trim();
+  const phone = document.getElementById("phone").value.trim();
+
+  if (!email || !username || !password || !phone) {
+    showToast("Complete all fields");
+    return;
+  }
+
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailPattern.test(email)) {
+    showToast("Invalid email address");
+    return;
+  }
+
+  const phonePattern = /^\d{7,15}$/;
+  if (!phonePattern.test(phone)) {
+    showToast("Invalid phone number");
+    return;
+  }
+
+  showToast("Account created ✅");
+  signupModal.style.display = "none";
+
+  document.getElementById("email").value = "";
+  document.getElementById("username").value = "";
+  document.getElementById("password").value = "";
+  document.getElementById("phone").value = "";
+  otpSection.style.display = "none";
+  sendOTPBtn.style.display = "block";
+  signupBtn.style.display = "none";
+});
+// ===== LOGIN REDIRECT =====
+const loginBtn = document.querySelector(".modal-btn"); // login button in modal
+const emailInput = document.querySelector("#loginModal input[type='email']");
+const passwordInput = document.querySelector("#loginModal input[type='password']");
+
+loginBtn.addEventListener("click", () => {
+  const email = emailInput.value.trim();
+  const password = passwordInput.value.trim();
+
+  // Replace this with your actual credentials or verification logic
+  if(email === "owner@example.com" && password === "123456") {
+    // Redirect to owner dashboard
+    window.location.href = "ownerDashboard.html";
+  } else {
+    alert("Invalid email or password");
+  }
+});
+
+</script>
+
+</body>
+</html>

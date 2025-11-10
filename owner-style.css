@@ -1,0 +1,227 @@
+/* OWNER DASHBOARD BACKGROUND */
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    font-family: sans-serif;
+    direction: ltr;
+    background: linear-gradient(to bottom, #009FFD, #2A2A72); /* same as home page */
+    overflow-x: hidden;
+}
+
+/* COVER SECTION */
+.cover-section {
+    width: 100%;
+    height: 220px; /* original header height */
+    background: linear-gradient(to bottom, #009FFD, #2A2A72);
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    border-radius: 0 0 20px 20px;
+}
+
+/* Profile picture overlaps main content */
+.profile-picture {
+    position: absolute;
+    top: 150px; /* slightly below cover-section top */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    border: 5px solid white;
+    overflow: hidden;
+    z-index: 9999;
+}
+
+/* Owner name below profile picture */
+.owner-name {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    z-index: 9999;
+    margin-top: 20px;
+
+}
+
+/* Owner name */
+.owner-name {
+    position: absolute;
+    top: 280px; /* right below profile picture */
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    z-index: 9999;
+}
+
+.profile-picture img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+
+/* MAIN CONTENT STARTS BELOW PROFILE SECTION */
+.main-content {
+    margin-top: 20px; /* spacing after profile + name */
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+}
+.btn {
+ display: inline-block;
+ margin: 10px 0;
+ width: 150px;           /* responsive */
+ max-width: 200px;
+ padding: 12px 0;
+ font-size: 17px;
+ text-decoration: none;
+ color: #ffffff;
+ background: linear-gradient(135deg, #6a11cb, #2575fc);
+ border: none;
+ border-radius: 8px;
+ cursor: pointer;
+ text-align: center;
+ transition: all 0.3s ease;
+}
+
+
+/* OWNER NAME */
+.owner-name {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px; /* spacing from bottom */
+    text-align: center;
+}
+
+/* PROFILE PICTURE */
+.profile-pic {
+    width: 120px;           
+    height: 120px;
+    border-radius: 50%;      
+    border: 4px solid white; 
+    position: absolute;      
+    bottom: -60px;           /* overlaps cover bottom */
+    left: 50%;               /* horizontal center */
+    transform: translateX(-50%); 
+    object-fit: cover;
+      z-index: 10;          
+}
+
+/* MAIN CONTENT */
+.main-content {
+    margin-top: 70px; 
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+}
+
+/* SIDEBAR */
+.footer-info {
+    font-size: small;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    padding: 12px 0;
+    box-sizing: border-box;
+    color: white;
+    display: flex;
+    flex-direction: row; /* horizontal side by side */
+    justify-content: center; /* center horizontally */
+    align-items: center; /* center vertically */
+    gap: 25px; /* space between p tags */
+    background: #000; /* optional: footer background */
+    z-index: 1000;
+}
+
+.footer-info p {
+    margin: 0;
+}
+
+/* Row for buttons below profile */
+.buttons-row {
+    display: flex;             /* side by side */
+    justify-content: left;   /* center horizontally */
+    align-items: left;       /* align vertically */
+    gap: 50px;                 /* spacing between buttons */
+    margin-top: 20px;          /* spacing from profile picture */
+}
+
+/* Buttons style */
+.btn {
+    padding: 0 20px;
+    font-size: 10px;
+    text-align: center;
+    align-items: center;
+    font-weight: normal;
+    color: #fff;
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+    height: 30px;
+    width: 120px;
+    box-sizing: border-box;
+  
+}
+/* Container for buttons inside cover section */
+.cover-buttons {
+    position: absolute;
+    top: 220px;       /* position near bottom of cover but above profile picture */
+    right: 20px;      /* slightly right */
+    display: flex;
+    gap: 10px;        /* space between buttons */
+    z-index: 10000;   /* above profile picture */
+}
+
+
+.btn:hover {
+    background: linear-gradient(135deg, #2575fc, #6a11cb);
+}
+/* Modal background */
+.modal {
+    display: none; /* hidden by default */
+    position: fixed;
+    z-index: 20000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.5);
+}
+
+/* Modal content box */
+.modal-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 10px;
+    width: 350px;
+    text-align: center;
+    position: relative;
+}
+
+/* Close button */
+.close-modal {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    cursor: pointer;
+}
+.modal { display:none; position:fixed; z-index:20000; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.5);}
+.modal-content { background:#fff; margin:5% auto; padding:20px; border-radius:10px; width:400px; text-align:center; position:relative;}
+.close-modal { position:absolute; top:10px; right:15px; font-size:24px; cursor:pointer;}

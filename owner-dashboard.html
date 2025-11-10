@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Owner Dashboard</title>
+<link rel="stylesheet" href="owner-style.css">
+<!-- Cropper.js CSS -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css" rel="stylesheet"/>
+<!-- Cropper.js JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
+<style>
+/* You can keep your existing CSS in owner-style.css */
+</style>
+</head>
+<body>
+
+<!-- COVER SECTION -->
+<div class="cover-section"></div>
+<div class="cover-buttons">
+    <button class="btn" id="editProfileBtn">Edit Profile</button>
+    <button class="btn" id="addListingBtn">Add Listing</button>
+</div>
+
+<!-- PROFILE PICTURE AND NAME -->
+<div class="profile-section">
+    <div class="profile-picture">
+        <img src="images/tropical-bg.jpg.jpg" alt="Owner Profile">
+    </div>
+    <div class="owner-name">John Doe</div>
+</div>
+
+<!-- Edit Profile Modal -->
+<div id="editProfileModal" class="modal">
+  <div class="modal-content">
+    <span class="close-modal">&times;</span>
+    <h3>Edit Profile</h3>
+
+    <label>Profile Picture:</label>
+    <input type="file" id="profilePicInput" accept="image/*"><br><br>
+    <img id="profilePicPreview" style="max-width:100%; display:none;">
+
+    <label>Cover Photo:</label>
+    <input type="file" id="coverPhotoInput" accept="image/*"><br><br>
+    <img id="coverPhotoPreview" style="max-width:100%; display:none;">
+
+    <button id="saveProfileBtn" class="btn">Save Changes</button>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="main-content">
+    <div class="dashboard-area">
+        <h3 class="listingsHeader">Listings</h3>
+        <div id="listingForm" style="display:none;">
+            <h4>Add Guesthouse or Room</h4>
+            <form>
+                <label>Atoll:</label>
+                <input type="text" name="atoll" class="input-box"><br><br>
+                <label>Island:</label>
+                <input type="text" name="island" class="input-box"><br><br>
+                <label>Area:</label>
+                <input type="text" name="area" class="input-box"><br><br>
+                <label>Room Type:</label>
+                <select name="roomType" class="input-box">
+                    <option value="single">Single</option>
+                    <option value="double">Double</option>
+                    <option value="suite">Suite</option>
+                </select><br><br>
+                <label>Price:</label>
+                <input type="number" name="price" class="input-box"><br><br>
+                <label>Guesthouse Image:</label>
+                <input type="file" name="image" class="input-box"><br><br>
+                <button type="submit" class="btn">Submit Listing</button>
+                <button type="button" class="btn" id="closeFormBtn">Close Form</button>
+            </form>
+        </div>
+
+        <div class="footer-info">
+            <p>Total Bookings: 0</p>
+            <p>Customer Calls/SMS: 0</p>
+        </div>
+    </div>
+</div>
+
+<script>
+// ===================== Add Listing Form =====================
+document.addEventListener('DOMContentLoaded', () => {
+    const addListingBtn = document.getElementById('addListingBtn');
+    const listingForm = document.getElementById('listingForm');
+    const closeFormBtn = document.getElementById('closeFormBtn');
+    const listingsHeader = document.getElementsByClassName('listingsHeader')[0];
+
+    if (addListingBtn && listingForm && closeFormBtn && listingsHeader) {
+        listingsHeader.style.display = 'none';
+
+        addListingBtn.addEventListener('click', () => {
+            listingForm.style.display = 'block';
+            addListingBtn.style.display = 'none';
+            listingsHeader.style.display = 'block';
+        });
+
+        closeFormBtn.addEventListener('click', () => {
+            listingForm.style.display = 'none';
+            addListingBtn.style.display = 'inline-block';
+            listingsHeader.style.display = 'none';
+        });
+    }
+});
+
+// ===================== Edit Profile Modal =====================
+const editProfileBtn = document.getElementById('editProfileBtn');
+const editProfileModal = document.getElementById('editProfileModal');
+const closeModal = document.querySelector('.close-modal');
+
+editProfileBtn.addEventListener('click', () => {
+    editProfileModal.style.display = 'block';
+});
+
+closeModal.addEventListener('click', () => {
+    editProfileModal.style.display = 'none';
+});
+
+window.addEventListener('click', (e) => {
+    if(e.target == editProfileModal){
+        editProfileModal.style.display = 'none';
+    }
+});
+
+// ===================== Cropper.js =====================
+let profileCropper, coverCropper;
+
+const profileInput = document.getElementById('profilePicInput');
+const coverInput = document.getElementById('coverPhotoInput');
+const profilePreview = document.getElementById('profilePicPreview');
+const coverPreview = document.getElementById('coverPhotoPreview');
+const saveBtn = document.getElementById('saveProfileBtn');
+
+profileInput.addEventListener('change', (e)=>{
+    const file = e.target.files[0];
+    if(file){
+        const url = URL.createObjectURL(file);
+        profilePreview.src = url;
+        profilePreview.style.display = 'block';
+
+        if(profileCropper) profileCropper.destroy();
+        profileCropper = new Cropper(profilePreview, {
+            aspectRatio: 1,
+            viewMode: 1
+        });
+    }
+});
+
+coverInput.addEventListener('change', (e)=>{
+    const file = e.target.files[0];
+    if(file){
+        const url = URL.createObjectURL(file);
+        coverPreview.src = url;
+        coverPreview.style.display = 'block';
+
+        if(coverCropper) coverCropper.destroy();
+        coverCropper = new Cropper(coverPreview, {
+            aspectRatio: 16/9,
+            viewMode: 1
+        });
+    }
+});
+
+saveBtn.addEventListener('click', ()=>{
+    if(profileCropper){
+        const profileCanvas = profileCropper.getCroppedCanvas({width: 130, height: 130});
+        document.querySelector('.profile-picture img').src = profileCanvas.toDataURL();
+    }
+
+    if(coverCropper){
+        const coverCanvas = coverCropper.getCroppedCanvas({width: 800, height: 220});
+        document.querySelector('.cover-section').style.backgroundImage = `url(${coverCanvas.toDataURL()})`;
+    }
+
+    editProfileModal.style.display = 'none';
+});
+</script>
+</body>
+</html>

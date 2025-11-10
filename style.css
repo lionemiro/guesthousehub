@@ -1,0 +1,279 @@
+/* ========================== */
+/* Global Page Settings */
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden;
+    font-family: sans-serif;
+    direction: ltr;
+
+    /* Only gradient background, no image */
+    background: linear-gradient(to bottom, rgba(0,159,253,1), rgba(42,42,114,1));
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+
+
+
+/* ========================== */
+/* Login Card */
+.login-card {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #000000;
+  width: 80%;
+  height: 240px;
+  max-width: 400px;
+  padding: 60px 20px;
+  margin: 50px auto;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+  text-align: center;
+
+}
+
+/* ========================== */
+/* Card Hover Effect */
+.login-card:hover{
+    box-shadow: 20px 10px 20px black;
+    transition: 0.5s ease-in-out;
+}
+
+/* ========================== */
+/* Titles */
+.home-title{
+    font-weight: bold;
+    position: relative;
+    top: -40px;
+    color: white;
+    font-size: 28px;
+}
+
+/* ========================== */
+/* Buttons */
+.btn {
+ display: inline-block;
+ margin: 10px 0;
+ width: 90%;           /* responsive */
+ max-width: 200px;
+ padding: 12px 0;
+ font-size: 17px;
+ font-weight: bold;
+ text-decoration: none;
+ color: #ffffff;
+ background: linear-gradient(135deg, #6a11cb, #2575fc);
+ border: none;
+ border-radius: 8px;
+ cursor: pointer;
+ text-align: center;
+ transition: all 0.3s ease;
+}
+
+.btn:hover {
+  background: #0f6fc0;       
+  transform: translateY(-2px); 
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+/* ========================== */
+/* Button group */
+.button-group{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+/* ========================== */
+/* Content */
+.content-up {
+    position: relative;
+    top: -15px; 
+    color: white;
+}
+
+/* ========================== */
+/* App Download */
+.app-download {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;      /* ensures icons wrap on small screens */
+}
+.app-download a img.app-icon {
+    max-width: 100%;
+    width: 150px;
+    height: auto;
+    object-fit: contain;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+.app-download a img.app-icon:hover {
+    transform: scale(1.1);
+}
+
+/* ========================== */
+/* Modals */
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(6px);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Modal Box */
+.modal-content {
+  background: rgba(255,255,255,0.6);
+  width: 90%;
+  max-width: 350px;
+  height: auto;
+  padding: 30px;
+  margin-top: 20px;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+  position: relative;
+  animation: fadeIn 0.3s;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* ========================== */
+/* Signup text */
+.signuptext {
+    font-family: sans-serif;
+    font-size: 14px;
+    color: #ffffff;
+}
+
+.signuptext .signup {
+    color: #1e90ff;
+    text-decoration: underline;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.signuptext .signup:hover {
+    color: #63b3ff;
+    text-decoration: none;
+}
+
+/* ========================== */
+/* Inputs */
+.input-box {
+  font-family: sans-serif;
+  direction: ltr;
+  width: 100%;
+  max-width: 200px;
+  height: 40px;
+  padding: 10px 12px;
+  margin: 10px auto;
+  display: block;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.6);
+  background: rgba(255,255,255,0.4);
+  font-weight: bold;
+  color: #000000;
+  box-sizing: border-box;
+}
+
+/* ========================== */
+/* Checkbox */
+.checkbox {
+  font-size: 14px;
+  display: flex;
+  gap: 8px;
+  margin: 5px auto 15px auto; /* center align */
+  justify-content: center;
+}
+
+/* ========================== */
+/* Close Button */
+.close {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+/* ========================== */
+/* Modal Buttons */
+.btn.modal-btn {
+    font-family: sans-serif;
+    direction: ltr;
+    font-weight: bold;
+    text-align: center;
+    font-size: 16px;
+    padding: 12px 0;
+    line-height: 1.2;
+    
+    display: block;      
+    width: 80%;           
+    margin: 10px auto;    
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+/* ========================== */
+/* Forgot Password */
+.forgot-password-text {
+  display: block;
+  margin-top: 15px;
+  font-size: 14px;
+  color: white;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.forgot-password-text:hover {
+  color: #0056b3;
+}
+
+/* ========================== */
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* ========================== */
+/* Toast Messages */
+#toast {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.85);
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease, bottom 0.4s ease;
+  z-index: 9999;
+}
+
+#toast.show {
+  opacity: 1;
+  bottom: 40px;
+}
+
